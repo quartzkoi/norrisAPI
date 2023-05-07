@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chuck Norris Jokes API Randomizer</title>
+</head>
+<body>
+  <h1>Chuck Norris Jokes</h1>
+  
+  <!-- Random Joke Button -->
+  <button id="get-joke">Get Joke</button>
+  
+  <!-- New Joke Button -->
+  <button id="new-joke">New Joke</button>
+  
+  <!-- Joke display field -->
+  <p id="joke"></p>
+  
+  <script>
+    // Create a field to input the joke
+    const jokeEl = document.getElementById('joke');
+    
+    // Connect references to each button
+    const getJokeBtn = document.getElementById('get-joke');
+    const newJokeBtn = document.getElementById('new-joke');
+
+    // Get a random joke and displays it on the page
+    function getJoke() {
+      // Request the data from the api.
+      fetch('https://api.chucknorris.io/jokes/random')
+        // When we receive a response, we parse it as JSON as to make it usable
+        .then(response => response.json())
+        // We display the joke onto the page
+        .then(data => {
+          jokeEl.innerText = data.value;
+        });
+    }
+
+    //Add an event listener to the two joke buttons to activate when clicked
+    getJokeBtn.addEventListener('click', getJoke);
+    newJokeBtn.addEventListener('click', getJoke);
+	//notes: Following the instructions, I was not sure how to differentiate the initial joke button and the random joke button, so in this instance, they are one and the same.
+  </script>
+</body>
+</html>
